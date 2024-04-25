@@ -1,0 +1,15 @@
+[package]
+name = "tushare"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+http = "1.1.0"
+log = "0.4.21"
+polars = { version = "0.39.2", features = ["lazy", "json"] }
+reqwest = { version = "0.12.4", features = ["blocking"]}
+serde = "1.0.198"
+serde_json = "1.0.116"
+thiserror = "1.0.59"
