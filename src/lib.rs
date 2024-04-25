@@ -16,7 +16,7 @@
 //! ## Note
 //! 1. Get a token from tushare.pro site before you can started.
 //! 2. Param api_name for function tushare.querybuilder() is predefined by Tushare webapi, refer to <https://tushare.pro/document/1?doc_id=130>.
-//! If you are still confusing what string should be used here (like I do), refer to the "api" field of [This](https://github.com/ProV1denCEX/Tushare.jl/blob/master/src/Tushare.yaml)
+//! If you are still confusing what string should be used here (like I do), refer to the "api" field of [this doc](https://github.com/ProV1denCEX/Tushare.jl/blob/master/src/Tushare.yaml)
 //! from ProV1denCEX. I personally found it very useful, together with other optional fields.
 //! 3. Param k/v, fields are defined clearly on Tushare website, see example <https://tushare.pro/document/2?doc_id=25>
 //! 4. Be aware of date string. They must be in *YYYYMMDD* format. Otherwise empty data will be returned.
