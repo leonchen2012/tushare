@@ -44,9 +44,9 @@ fn mergedict(map_pre:Dict, map_post:Dict) -> Dict{
 }
 
 
-/// A tushare query that satistfies rust builder pattern
-/// The QueryBuilder is immutable, which means a new instance
-/// of QueryBuilder will be created during params()/addparam()/fields() calling
+/// A tushare query that satistfies rust builder pattern.
+/// The QueryBuilder is immutable, which means a new instance 
+/// of QueryBuilder will be created during params()/addparam()/fields() calling.
 /// So it is safe for multi-threading
 pub struct QueryBuilder<'a> {
     tushare: &'a Tushare,
@@ -56,10 +56,10 @@ pub struct QueryBuilder<'a> {
 }
 
 impl<'a> QueryBuilder<'a> {
-    pub(crate) fn new(tushare: &'a Tushare, api_name: String) -> Self {
+    pub(crate) fn new(tushare: &'a Tushare, api_name: &str) -> Self {
         QueryBuilder {
             tushare,
-            api_name,
+            api_name: api_name.to_string(),
             params: None,
             fields: None,
         }
@@ -88,8 +88,8 @@ impl<'a> QueryBuilder<'a> {
     /// The main purpose of parameters is to define your requirements clearly.
     /// # k/v
     /// The predefined request key/value pair according to each api_name, e.g. 'start_date', 'end_date'
-    pub fn addparam(self: &Self, k:String, v:String) -> Self{
-        let new_paramdict = Dict::from([(k, v)]);
+    pub fn addparam(self: &Self, k:&str, v:&str) -> Self{
+        let new_paramdict = Dict::from([(k.to_string(), v.to_string())]);
         let paramdict = match &self.params {
             Some(dict) => mergedict(dict.clone(),new_paramdict),
             None => new_paramdict
@@ -107,12 +107,12 @@ impl<'a> QueryBuilder<'a> {
     /// You may want to use it to reduce network IO and clarify your requirement clearly.
     /// # fields
     /// The predefined fields string separated with commas, e.g. "ts_code,trade_date,open,high,low,close,pre_close"
-    pub fn fields(self: &Self, fields: String) -> Self {
+    pub fn fields(self: &Self, fields: &str) -> Self {
         QueryBuilder {
             tushare: self.tushare,
             api_name: self.api_name.clone(),
             params: self.params.clone(),
-            fields: Some(fields),
+            fields: Some(fields.to_string()),
         }
     }
 
@@ -157,7 +157,7 @@ impl<'a> QueryBuilder<'a> {
                 .ok_or(TushareError::DataError(format!("data/fields at {i}")))?;
             fields.push(_field);
         }
-        let data: &Vec<Value> = resp_json["data"]["items"]
+        let data= resp_json["data"]["items"]
             .as_array()
             .ok_or(TushareError::DataError("data/items".to_string()))?;
         for (i, item) in data.iter().enumerate() {

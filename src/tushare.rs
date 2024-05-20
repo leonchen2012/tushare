@@ -15,14 +15,14 @@ impl Tushare{
     /// # token
     /// The token is necessary for every call
     /// Apply it before you do any access 
-    pub fn new(token: String) -> Self {
-        Tushare{ token : token,
+    pub fn new(token: &str) -> Self {
+        Tushare{ token : token.to_string(),
                  api_endpoint: "http://api.tushare.pro".to_string()}
     }
 
     /// Create a QueryBuilder to actually build and process the query
     /// # api_name: 
-    pub fn querybuilder(self: &Self, api_name: String) -> QueryBuilder{
+    pub fn querybuilder(self: &Self, api_name: &str) -> QueryBuilder{
         QueryBuilder::new(self, api_name)
     }
 

@@ -4,17 +4,17 @@
  Typical approach to get 1 row stock info of 000001.SZ(Pingan Bank) with a builder pattern:
  ```rust
  use tushare::*;
- let tushare = Tushare::new("<your token>".to_string());
- let df = tushare.querybuilder("daily".to_string())
-             .addparam("trade_date".to_string(), "20240424".to_string()) //opiontal step
-             .addparam("ts_code".to_string(),"000001.SZ".to_string()) //optional step
-             .fields("ts_code,trade_date,open,high,low,close,pre_close,change,pct_chg,vol".to_string()) //optional step
+ let tushare = Tushare::new("<your token>");
+ let df = tushare.querybuilder("daily")
+             .addparam("trade_date", "20240424") //opiontal step
+             .addparam("ts_code","000001.SZ") //optional step
+             .fields("ts_code,trade_date,open,high,low,close,pre_close,change,pct_chg,vol") //optional step
              .query()?;
  print!("here are the results\n");
  print!("{df:?}");
  ```
  ## Note
- 1. Get a token from tushare.pro site before you can started.
+ 1. Get a token from tushare.pro site before you start.
  2. Param api_name for function tushare.querybuilder() is predefined by Tushare webapi, refer to <https://tushare.pro/document/1?doc_id=130>.
  If you are still confusing what string should be used here (like I do), refer to the "api" field of [this doc](https://github.com/ProV1denCEX/Tushare.jl/blob/master/src/Tushare.yaml)
  from ProV1denCEX. I personally found it very useful, together with other optional fields.

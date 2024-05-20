@@ -1,11 +1,11 @@
 [package]
 name = "tushare"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 keywords = ["tushare", "chinese_stock_data"]
 categories = ["api-bindings"]
-description = "A rust library to read the data tushare and tranform it into polars dataframe object"
+description = "A rust library to read the data from tushare and tranform it into polars dataframe object"
 readme = "README.md"
 repository = "https://github.com/leonchen2012/tushare"
 
